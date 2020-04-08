@@ -1,5 +1,5 @@
-'use ctrict';
 'use strict';
+
 let money,
     IsNamber = (n) => {
         return !isNaN(parseFloat(n)) && isFinite(n); //!isNaN(parseFloat(n)) && n !== '';
@@ -153,21 +153,26 @@ let targetAmount = document.querySelector('target-amount');
 let expensesItem = document.querySelector('.additional_expenses-item');
 let incomeItems = document.querySelector('.income-items');
 let salaryAmount = document.querySelector('.salary-amount');
-let budgetMonthValue = document.querySelector('.budget_month-value');
-let budgetDayValue = document.querySelector('.budget_day-value');
-let expensesMonthValue = document.querySelector('.expenses_month-value');
-let additionalIncomeValue = document.querySelector('.additional_income-value');
-let additionalExpensesValue = document.querySelector('.additional_expenses-value');
-let incomePeriodValue = document.querySelector('.income_period-value');
-let  targetMonthValue = document.querySelector('.target_month-value');
+let result = document.getElementsByClassName('result')[0];
+console.log(' result: ', result);
 
-console.log('targetMonthValue: ', targetMonthValue);
-console.log('incomePeriodValue: ', incomePeriodValue);
-console.log('expensesMonthValue: ', expensesMonthValue);
-console.log('additionalExpensesValue: ', additionalExpensesValue);
-console.log('additionalIncomeValue: ', additionalIncomeValue);
+let budgetMonthValue = result.getElementsByClassName('budget_month-value')[0];
+let budgetDayValue = result.getElementsByClassName('budget_day-value')[0];
+let expensesMonthValue = result.getElementsByClassName('expenses_month-value')[0];
+let additionalIncomeValue = result.getElementsByClassName('additional_income-value')[0];
+let additionalExpensesValue = result.getElementsByClassName('additional_expenses-value')[0];
+let incomePeriodValue = result.getElementsByClassName('income_period-value')[0];
+let targetMonthValue = result.getElementsByClassName('target_month-value')[0];
+
+console.log('budgetMonthValue: ', budgetMonthValue);
 console.log('budgetDayValue: ', budgetDayValue);
-console.log('budgetMonthValue:!!!! ', budgetMonthValue);
+console.log('expensesMonthValue : ', expensesMonthValue);
+console.log('dditionalIncomeValue: ', additionalIncomeValue);
+console.log('additionalExpensesValue: ', additionalExpensesValue);
+console.log('incomePeriodValue: ', incomePeriodValue);
+console.log('targetMonthValue: ', targetMonthValue);
+
+
 
 
 
