@@ -84,7 +84,7 @@ let appData = {
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
         
-        periodSelect.addEventListener('mouseup',function(){
+        periodSelect.addEventListener('input',function(){
             incomePeriodValue.value = appData.calcSavedMoney();
         });
         
