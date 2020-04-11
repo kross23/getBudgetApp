@@ -83,7 +83,7 @@ let appData = {
         additionalExpensesValue.value = appData.addExpenses.join(', ');
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-        
+        incomePeriodValue.value = appData.calcSavedMoney();
         periodSelect.addEventListener('input',function(){
             incomePeriodValue.value = appData.calcSavedMoney();
         });
@@ -208,6 +208,8 @@ salaryAmount.addEventListener('input', function () {
     if (salaryAmount.value !== '' &&IsNamber(salaryAmount.value) ) {
         //start.setAttribute('disabled' , false);//start.removeAttribute(disabled);
         start.removeAttribute('disabled');
+    }else{
+        start.disabled = true;
     }
 });
 start.addEventListener('click', appData.start);
@@ -215,6 +217,6 @@ start.addEventListener('click', appData.start);
 btnPlusExpenses.addEventListener('click', appData.addExpensesBlock);
 btnPlusIcome.addEventListener('click', appData.addIncomeBlock);
 
-periodSelect.addEventListener('mouseup', function () {
+periodSelect.addEventListener('input', function () {
     periodAmount.innerHTML = periodSelect.value;
 });
