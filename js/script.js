@@ -86,7 +86,7 @@ let appData = {
         additionalIncomeValue.value = this.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(this.getTargetMonth());
         incomePeriodValue.value = this.calcSavedMoney();
-        const me =this;
+        const me = this;
         periodSelect.addEventListener('input', function () {
             incomePeriodValue.value = me.calcSavedMoney();
             console.log('showResult', me);
@@ -231,8 +231,9 @@ salaryAmount.addEventListener('input', function () {
     }
 });
 const restart = function () {
+    restarval = document.querySelectorAll('[type=text]');
     restarval.forEach(function (item) {
-        item.setAttribute("readonly", true);
+        item.setAttribute('readonly','readonly' );
     });
     start.style.display = 'none';
     //display
@@ -262,6 +263,8 @@ buttonCancel.addEventListener('click', function () {
             }
         }
     }
+    periodSelect.value = 1;
+    periodAmount.innerHTML = periodSelect.value;
     start.style.display = 'block';
 });
 //........................................................
