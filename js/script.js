@@ -225,6 +225,10 @@ let appData = {
         this.budgetDay = 0;
         this.budgetMonth = 0;
         this.expensesMonth = 0;
+
+        btnPlusIcome.style.display = 'inline';
+        btnPlusExpenses.style.display='inline';
+
     },
 };
 
