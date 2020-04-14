@@ -36,10 +36,7 @@ let btnPlusIcome = document.getElementsByTagName('button')[0],
 //    console.log('data: ',restartvalue);
 let restarval = document.querySelectorAll('[type=text]');
 
-
-console.log('value', restarval);
-let money,
-    IsNamber = (n) => {
+let    IsNamber = (n) => {
         return !isNaN(parseFloat(n)) && isFinite(n); //!isNaN(parseFloat(n)) && n !== '';
     };
 
@@ -55,11 +52,12 @@ let appData = {
     deposit: false,
     percentDeposit: 0,
     manyDeposit: 0,
-    mission: 150000,
-    period: 3,
+    mission: 0,
+    period: 0,
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
+    
     start: function () {
         console.log('this', this);
         // return;///document.getElementById("MyButton").disabled = true;
@@ -98,8 +96,6 @@ let appData = {
         console.log('addExpensesBlock', this);
         //console.log('', expensesItem.parentNode);
         let cloneExpensesItem = expensesItem[0].cloneNode(true);
-
-
 
         expensesItem[0].parentNode.insertBefore(cloneExpensesItem, btnPlusExpenses);
         expensesItem = document.querySelectorAll('.expenses-items');
@@ -157,6 +153,7 @@ let appData = {
                 me.addExpenses.push(item);
             }
         });
+        console.log('addexpenses',typeof(me.addExpenses));
     },
     getAddIncam: function () {
         console.log('getAddIncam', this);
@@ -214,6 +211,7 @@ let appData = {
         return this.budgetMonth * periodSelect.value;
     }
 };
+const appDataCopy= Object.assign({}, appData);
 const binden = () => {
     for (let key in appData) {
         if (typeof appData[key] === 'function') {
@@ -230,6 +228,24 @@ salaryAmount.addEventListener('input', function () {
         start.disabled = true;
     }
 });
+const reset = function (obj){
+    obj.budget= 0,
+    obj.income= {}, //
+    obj.addIncome= [],
+    obj.IncomeSumm= 0,
+    obj.incomeMonth= 0,
+    obj.expenses= {},
+    obj.addExpenses= [],
+    obj.cashIncome= 0,
+    obj.deposit= false,
+    obj.percentDeposit= 0,
+    obj.manyDeposit= 0,
+    obj.mission= 0,
+    obj.period= 0,
+    obj.budgetDay= 0,
+    obj.budgetMonth= 0,
+    obj.expensesMonth= 0;
+  };
 const restart = function () {
     restarval = document.querySelectorAll('[type=text]');
     restarval.forEach(function (item) {
@@ -265,6 +281,7 @@ buttonCancel.addEventListener('click', function () {
     }
     periodSelect.value = 1;
     periodAmount.innerHTML = periodSelect.value;
+   reset(appData);
     start.style.display = 'block';
 });
 //........................................................
