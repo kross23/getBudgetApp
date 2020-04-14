@@ -229,6 +229,33 @@ let appData = {
         btnPlusIcome.style.display = 'inline';
         btnPlusExpenses.style.display='inline';
 
+        restarval.forEach(function (item) {
+            item.removeAttribute("readonly");
+            item.value = '';
+        });
+        buttonCancel.style.display = 'none';
+        expensesItem = document.querySelectorAll('.expenses-items');
+        if (expensesItem.length !== 0) {
+            for (let i = 0; i < expensesItem.length; i++) {
+                if (i > 0) {
+                    expensesItem[i].remove();
+                }
+            }
+        }
+        incomeItems = document.querySelectorAll('.income-items');
+        if (incomeItems.length !== 0) {
+            for (let i = 0; i < incomeItems.length; i++) {
+                if (i > 0) {
+                    incomeItems[i].remove();
+                }
+            }
+        }
+        btnPlusIcome.removeAttribute('disabled');
+        btnPlusExpenses.removeAttribute('disabled');
+        periodSelect.removeAttribute('disabled');
+        periodSelect.value = 1;
+        periodAmount.innerHTML = periodSelect.value;
+
     },
 };
 
@@ -254,6 +281,10 @@ const restart = function () {
     restarval.forEach(function (item) {
         item.setAttribute('readonly', 'readonly');
     });
+    btnPlusIcome.disabled=true;
+    btnPlusExpenses.disabled=true;
+    periodSelect.disabled=true;
+
     start.style.display = 'none';
     buttonCancel.style.display = 'block';
 };
@@ -262,29 +293,7 @@ start.addEventListener('click', function () {
     restart();
 });
 buttonCancel.addEventListener('click', function () {
-    restarval.forEach(function (item) {
-        item.removeAttribute("readonly");
-        item.value = '';
-    });
-    buttonCancel.style.display = 'none';
-    expensesItem = document.querySelectorAll('.expenses-items');
-    if (expensesItem.length !== 0) {
-        for (let i = 0; i < expensesItem.length; i++) {
-            if (i > 0) {
-                expensesItem[i].remove();
-            }
-        }
-    }
-    incomeItems = document.querySelectorAll('.income-items');
-    if (incomeItems.length !== 0) {
-        for (let i = 0; i < incomeItems.length; i++) {
-            if (i > 0) {
-                incomeItems[i].remove();
-            }
-        }
-    }
-    periodSelect.value = 1;
-    periodAmount.innerHTML = periodSelect.value;
+ 
     appData.reset();
     start.style.display = 'block';
 });
