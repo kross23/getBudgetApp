@@ -91,10 +91,8 @@ AppData.prototype.addExpensesBlock = function () {
     }
 };
 AppData.prototype.getExpenses = function () {
-    console.log('getExpensesk', this);
     let me = this;
     expensesItem.forEach(function (item) {
-        console.log('item', item);
         let itemExpenses = item.querySelector('.expenses-title').value;
         let keshExpenses = item.querySelector('.expenses-amount').value;
         if (itemExpenses !== '' && keshExpenses !== '') {
@@ -111,7 +109,6 @@ AppData.prototype.addIncomeBlock = function () {
     }
 };
 AppData.prototype.getIcome = function () {
-    console.log('incomeItems', this);
     let me = this;
     incomeItems.forEach(function (item) {
         let itemIncome = item.querySelector('.income-title').value;
@@ -135,7 +132,6 @@ AppData.prototype.getAddExpenses = function () {
     });
 };
 AppData.prototype.getAddIncam = function () {
-    console.log('getAddIncam', this);
     const me = this;
     additionalIncomeItem.forEach((item) => {
         let itemValue = item.value.trim();
@@ -145,13 +141,11 @@ AppData.prototype.getAddIncam = function () {
     });
 };
 AppData.prototype.getExpensesMonth = function () {
-    console.log('getExpensesMonth', this);
     for (let i in this.expenses) {
         this.expensesMonth += +this.expenses[i];
     }
 };
 AppData.prototype.getBudget = function () { // пере
-    console.log(' getBudget', this);
     this.budgetMonth = (this.budget - this.expensesMonth);
     this.budgetDay = Math.ceil(this.budgetMonth / 30);
 };
@@ -183,7 +177,6 @@ AppData.prototype.getInfoDeposit = function () {
     }
 };
 AppData.prototype.calcSavedMoney = function () {
-    console.log('this cfalsave', this);
     return this.budgetMonth * periodSelect.value;
 };
 AppData.prototype.reset = function () {
@@ -267,6 +260,6 @@ AppData.prototype.eventsListeners = function () {
         periodAmount.innerHTML = periodSelect.value;
     });
 };
-const appData = new AppData();
-console.log('appData: ', appData);
-appData.eventsListeners();
+const appDataX = new AppData();
+console.log('appData: ', appDataX);
+appDataX.eventsListeners();
