@@ -213,6 +213,30 @@ class AppData {
         periodAmount.innerHTML = periodSelect.value;
         start.style.display = 'block';
     }
+    getStatusIncome () { // функция урвень дохода  
+        if (this.budgetDay > 1200) {
+            console.log('у вас высокий уровень дохода');
+        } else if (this.budgetDay > 600 && this.budgetDay < 1200) {
+            console.log('у вас средний уровень дохода');
+        } else if (this.budgetDay < 600 && this.budgetDay >= 1) {
+            console.log('у вас низкий уровень дохода');
+        } else {
+            console.log('Что то пошло не так');
+        }
+    }
+    getInfoDeposit  () {
+        if (this.deposit) {
+            do {
+                this.percentDeposit = prompt('годовой процент ?', 0.5);
+            } while (!IsNamber(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null);
+    
+            do {
+                this.manyDeposit = prompt('сумма депозита ', 10000);
+            } while (!IsNamber(this.manyDeposit) || this.manyDeposit === '' || this.manyDeposit === null);
+            this.percentDeposit = +this.percentDeposit;
+            this.manyDeposit += this.manyDeposit;
+        }
+    }
     IsNamber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n); //!isNaN(parseFloat(n)) && n !== '';
     }
