@@ -29,7 +29,9 @@ let btnPlusIcome = document.getElementsByTagName('button')[0],
 
     periodAmount = document.querySelector('.period-amount');
 let restarval = document.querySelectorAll('[type=text]');
-
+const IsNamber=(n)=> {
+    return !isNaN(parseFloat(n)) && isFinite(n); //!isNaN(parseFloat(n)) && n !== '';
+};
 
 class AppData {
     constructor(budget = 0, income = {}, addIncome = [], IncomeSumm = 0, incomeMonth = 0, expenses = {}, addExpenses = [],
@@ -108,7 +110,7 @@ class AppData {
     getAddIncam() {     //возможный доход {}
     
         additionalIncomeItem.forEach(item => {
-            let itemValue = item.value.trim();
+            const itemValue = item.value.trim();
             if (itemValue !== '') {
                 this.addIncome.push(itemValue);
             }
@@ -140,7 +142,7 @@ class AppData {
         buttonCancel.style.display = 'block';
     }
     addExpensesBlock() {
-        let cloneExpensesItem = expensesItem[0].cloneNode(true);
+        const cloneExpensesItem = expensesItem[0].cloneNode(true);
         expensesItem[0].parentNode.insertBefore(cloneExpensesItem, btnPlusExpenses);
         expensesItem = document.querySelectorAll('.expenses-items');
         if (expensesItem.length === 3) {
@@ -148,7 +150,7 @@ class AppData {
         }
     }
     addIncomeBlock() {
-        let cloneincomeItems = incomeItems[0].cloneNode(true);
+        const cloneincomeItems = incomeItems[0].cloneNode(true);
         incomeItems[0].parentNode.insertBefore(cloneincomeItems, btnPlusIcome);
         incomeItems = document.querySelectorAll('.income-items');
         if (incomeItems.length === 3) {
@@ -237,15 +239,13 @@ class AppData {
             this.manyDeposit += this.manyDeposit;
         }
     }
-    IsNamber(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n); //!isNaN(parseFloat(n)) && n !== '';
-    }
+
 
     //............слушатели..............................
     eventsListeners() {
 
         salaryAmount.addEventListener('input', () => {
-            if (salaryAmount.value !== '' && this.IsNamber(salaryAmount.value)) {
+            if (salaryAmount.value !== '' && IsNamber(salaryAmount.value)) {
                 start.removeAttribute('disabled');
             } else {
                 start.disabled = true;
@@ -257,8 +257,8 @@ class AppData {
         });
 
         buttonCancel.addEventListener('click', () => {
-            this.reset()
-        }); // this.reset();
+            this.reset();
+        });
         btnPlusExpenses.addEventListener('click', () => {
             this.addExpensesBlock();
         });
@@ -272,45 +272,6 @@ class AppData {
         });
     }
 }; //........class....................................
-
-
-
-
-
-
-
-
-
-
-
-
-
-AppData.prototype.getStatusIncome = function () { // функция урвень дохода  
-    if (this.budgetDay > 1200) {
-        console.log('у вас высокий уровень дохода');
-    } else if (this.budgetDay > 600 && this.budgetDay < 1200) {
-        console.log('у вас средний уровень дохода');
-    } else if (this.budgetDay < 600 && this.budgetDay >= 1) {
-        console.log('у вас низкий уровень дохода');
-    } else {
-        console.log('Что то пошло не так');
-    }
-};
-AppData.prototype.getInfoDeposit = function () {
-    if (this.deposit) {
-        do {
-            this.percentDeposit = prompt('годовой процент ?', 0.5);
-        } while (!IsNamber(this.percentDeposit) || this.percentDeposit === '' || this.percentDeposit === null);
-
-        do {
-            this.manyDeposit = prompt('сумма депозита ', 10000);
-        } while (!IsNamber(this.manyDeposit) || this.manyDeposit === '' || this.manyDeposit === null);
-        this.percentDeposit = +this.percentDeposit;
-        this.manyDeposit += this.manyDeposit;
-    }
-};
-
-
 
 
 const appDataX = new AppData();
