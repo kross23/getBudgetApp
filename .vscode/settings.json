@@ -5,5 +5,5 @@
     
     ],
     "eslint.alwaysShowStatus": true,
-    "eslint.format.enable": true
+    "eslint.format.enable": true,
 }
