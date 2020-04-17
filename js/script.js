@@ -66,7 +66,7 @@ class AppData {
 
     }
     getBudget() {
-        const monthDeposit = this.manyDeposit * (this.depositPersent*100);
+        const monthDeposit = this.manyDeposit * (this.depositPersent / 100);
         this.budget = +salaryAmount.value;
         this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
         console.log('this.budget: ', this.budget);
@@ -227,22 +227,20 @@ class AppData {
             console.log('Что то пошло не так');
         }
     }
-getInfoDeposit(){
-    if(this.deposit){
-        this.percentDeposit=+depositPersent.value;
-        console.log('this.percentDeposit: ', typeof(this.percentDeposit));
+    getInfoDeposit() {
+        if (this.deposit) {
+            this.percentDeposit = +depositPersent.value;
 
-        this.manyDeposit=+depositAmount.value;
-        console.log('this.manyDeposit: ', typeof(this.manyDeposit));
+            this.manyDeposit = +depositAmount.value;
+        }
     }
-}
-    changePersent(){
-        const selectIndex =this.value;
+    changePersent() {
+        const selectIndex = this.value;
         console.log('selectIndex: ', selectIndex);
-        if(selectIndex==='other'){
-            //depositPersent.value=depositPersent;
-        }else{
-            depositPersent.value=selectIndex;
+        if (selectIndex === 'other') {
+
+        } else {
+            depositPersent.value = selectIndex;
         }
 
     }
@@ -252,8 +250,8 @@ getInfoDeposit(){
             depositBanck.style.display = 'inline-block';
             depositAmount.style.display = 'inline-block';
             this.deposit = true;
-            
-            depositBanck.addEventListener('change',this.changePersent);
+
+            depositBanck.addEventListener('change', this.changePersent);
         } else {
             console.log('uncheck');
             depositBanck.style.display = 'none';
@@ -261,7 +259,7 @@ getInfoDeposit(){
             depositBanck.value = '';
             depositAmount.value = '';
             this.deposit = false;
-            depositBanck.removeEventListener('change',this.changePersent);
+            depositBanck.removeEventListener('change', this.changePersent);
         }
     }
     //............слушатели..............................
@@ -274,9 +272,9 @@ getInfoDeposit(){
                 start.disabled = true;
             }
         });
-        start.addEventListener('click',this.start);
+        start.addEventListener('click', this.start);
 
-        buttonCancel.addEventListener('click',this.reset);
+        buttonCancel.addEventListener('click', this.reset);
         btnPlusExpenses.addEventListener('click', this.addExpensesBlock);
 
         btnPlusIcome.addEventListener('click', this.addIncomeBlock);
