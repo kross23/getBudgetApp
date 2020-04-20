@@ -244,15 +244,32 @@ class AppData {
 			depositPersent.value = '';
 			depositPersent.style.display = 'inline-block';
 			depositPersent.removeAttribute('disabled');
+			depositPersent.addEventListener('input', () => {
+				start.disabled = true;
+				if ( depositPersent.value === '' || !IsNamber(depositPersent.value)|| Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
+					start.disabled = true;
+					console.log('start.disabled = true depositPersent.addEventListener ');
+				} else {
+					start.removeAttribute('disabled');
+					console.log('start.removeAttribute ',typeof(depositPersent.value));
+				}
+			});
 		} else {
 			depositPersent.style.display = 'none';
 			depositPersent.value = selectIndex;
 		}
-
+		depositAmount.addEventListener('input', () => {
+			if (depositAmount.value === '' ||!IsNamber(depositAmount.value)||depositPersent.value === '' || !IsNamber(depositPersent.value)|| Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value)> 100) {
+				start.disabled = true;
+			} else {
+				start.removeAttribute('disabled');
+			}
+		});
 	}
 	depositHandler() {
 		if (depositCheck.checked) {
 			console.log('check');
+			start.disabled = true;
 			depositBanck.style.display = 'inline-block';
 			depositAmount.style.display = 'inline-block';
 			this.deposit = true;
@@ -261,6 +278,7 @@ class AppData {
 			console.log('uncheck');
 			depositBanck.style.display = 'none';
 			depositAmount.style.display = 'none';
+			depositPersent.style.display = 'none';
 			depositBanck.value = '';
 			depositAmount.value = '';
 			depositPersent.value = '';
@@ -273,50 +291,14 @@ class AppData {
 
 	//............слушатели..............................
 	eventsListeners() {
-		if (this.deposit !== true) {
-			console.log('this.deposit: ', this.deposit);
-			console.log('this.deposit: ', this.deposit);
-			depositPersent.addEventListener('input', () => {
-				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || depositPersent.value <= 0 && depositPersent.value > 100) {
-					start.disabled = true;
-				} else {
 
-					start.removeAttribute('disabled');
-					console.log('start.removeAttribute 0');
-				}
-			});
-			depositAmount.addEventListener('input', () => {
-				if (depositAmount.value === '' || !IsNamber(depositAmount.value)) {
-					start.disabled = true;
-					console.log('!!start.disabled: , start.disabled');
-				} else {
-					console.log('depositAmount: ', depositAmount);
-					start.removeAttribute('disabled');
-					console.log('start.removeAttribute:1 ');
-				}
-			});
-			salaryAmount.addEventListener('input', () => {
-				if (salaryAmount.value === '' || !IsNamber(salaryAmount.value)) {
-					start.disabled = true;
-				} else {
-
-					start.removeAttribute('disabled');
-					console.log('start.removeAttributdisabled 2');
-				}
-			});
-
-		} else {
-			salaryAmount.addEventListener('input', () => {
-				if (salaryAmount.value === '' || !IsNamber(salaryAmount.value)) {
-					start.disabled = true;
-				} else {
-
-					start.removeAttribute('disabled');
-					console.log('start.removeAttribute disabled 3 ');
-				}
-			});
-		}
-
+		salaryAmount.addEventListener('input', () => {
+			if (salaryAmount.value === ''  || !IsNamber(salaryAmount.value)) {
+				start.disabled = true;
+			} else {
+				start.removeAttribute('disabled');
+			}
+		});
 		start.addEventListener('click', this.start.bind(this));
 		buttonCancel.addEventListener('click', this.reset);
 		btnPlusExpenses.addEventListener('click', this.addExpensesBlock);
@@ -334,3 +316,5 @@ class AppData {
 const appDataX = new AppData();
 console.log('appDatax: ', appDataX);
 appDataX.eventsListeners();
+
+
