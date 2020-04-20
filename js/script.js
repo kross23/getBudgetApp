@@ -188,6 +188,7 @@ class AppData {
 		depositCheck.checked = false;
 		depositBanck.style.display = 'none';
 		depositAmount.style.display = 'none';
+		depositPersent.style.display = 'none';
 		depositPersent.value = '';
 		depositBanck.value = 0;
 		depositAmount.value = '';
