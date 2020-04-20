@@ -249,6 +249,7 @@ class AppData {
 				start.disabled = true;
 				if ( depositPersent.value === '' || !IsNamber(depositPersent.value)|| Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
 					start.disabled = true;
+					depositPersent.value='';
 					console.log('start.disabled = true depositPersent.addEventListener ');
 				} else {
 					start.removeAttribute('disabled');
@@ -262,6 +263,7 @@ class AppData {
 		depositAmount.addEventListener('input', () => {
 			if (depositAmount.value === '' ||!IsNamber(depositAmount.value)||depositPersent.value === '' || !IsNamber(depositPersent.value)|| Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value)> 100) {
 				start.disabled = true;
+				depositAmount.value='';
 			} else {
 				start.removeAttribute('disabled');
 			}
