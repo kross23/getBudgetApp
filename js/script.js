@@ -234,30 +234,8 @@ class AppData {
 		}
 	}
 	getInfoDeposit() {
-
-		if (this.deposit) {
-			while (!IsNamber(depositPersent.value) ||  depositPersent.value <= 0 || depositPersent.value >100) {
-				alert('введите коректный процент');
-				break;
-			}
-			this.percentDeposit = depositPersent.value;
-
-			if (this.percentDeposit) {
-
-				while (!IsNamber(depositAmount.value) || depositAmount.value === '') {
-					alert('введите коректную сумму');
-					break;
-				}
-				this.manyDeposit = depositAmount.value;
-
-			}
-
-		}
-
-
-
-
-
+		this.manyDeposit = depositAmount.value;
+		this.percentDeposit = depositPersent.value;
 	}
 	changePersent() {
 		const selectIndex = this.value;
@@ -279,8 +257,6 @@ class AppData {
 			depositAmount.style.display = 'inline-block';
 			this.deposit = true;
 			depositBanck.addEventListener('change', this.changePersent);
-
-
 		} else {
 			console.log('uncheck');
 			depositBanck.style.display = 'none';
@@ -297,24 +273,54 @@ class AppData {
 
 	//............слушатели..............................
 	eventsListeners() {
+		if (this.deposit !== true) {
+			console.log('this.deposit: ', this.deposit);
+			console.log('this.deposit: ', this.deposit);
+			depositPersent.addEventListener('input', () => {
+				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || depositPersent.value <= 0 && depositPersent.value > 100) {
+					start.disabled = true;
+				} else {
 
-		salaryAmount.addEventListener('input', () => {
-			if (salaryAmount.value === '' || IsNamber(salaryAmount.value)) {
-				start.removeAttribute('disabled');
-			} else {
-				start.disabled = true;
+					start.removeAttribute('disabled');
+					console.log('start.removeAttribute 0');
+				}
+			});
+			depositAmount.addEventListener('input', () => {
+				if (depositAmount.value === '' || !IsNamber(depositAmount.value)) {
+					start.disabled = true;
+					console.log('!!start.disabled: , start.disabled');
+				} else {
+					console.log('depositAmount: ', depositAmount);
+					start.removeAttribute('disabled');
+					console.log('start.removeAttribute:1 ');
+				}
+			});
+			salaryAmount.addEventListener('input', () => {
+				if (salaryAmount.value === '' || !IsNamber(salaryAmount.value)) {
+					start.disabled = true;
+				} else {
 
-			}
-		});
+					start.removeAttribute('disabled');
+					console.log('start.removeAttributdisabled 2');
+				}
+			});
+
+		} else {
+			salaryAmount.addEventListener('input', () => {
+				if (salaryAmount.value === '' || !IsNamber(salaryAmount.value)) {
+					start.disabled = true;
+				} else {
+
+					start.removeAttribute('disabled');
+					console.log('start.removeAttribute disabled 3 ');
+				}
+			});
+		}
+
 		start.addEventListener('click', this.start.bind(this));
 		buttonCancel.addEventListener('click', this.reset);
 		btnPlusExpenses.addEventListener('click', this.addExpensesBlock);
-
 		btnPlusIcome.addEventListener('click', this.addIncomeBlock);
-		// btnPlusIcome.addEventListener('click', () => {
-		//     this.addIncomeBlock();
-		// });
-
 		periodSelect.addEventListener('input', () => {
 			periodAmount.innerHTML = periodSelect.value;
 		});
