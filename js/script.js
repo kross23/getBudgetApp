@@ -247,13 +247,13 @@ class AppData {
 			depositPersent.removeAttribute('disabled');
 			depositPersent.addEventListener('input', () => {
 				start.disabled = true;
-				if ( depositPersent.value === '' || !IsNamber(depositPersent.value)|| Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
+				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
 					start.disabled = true;
-					depositPersent.value='';
+					depositPersent.value = '';
 					console.log('start.disabled = true depositPersent.addEventListener ');
 				} else {
 					start.removeAttribute('disabled');
-					console.log('start.removeAttribute ',typeof(depositPersent.value));
+					console.log('start.removeAttribute ', typeof(depositPersent.value));
 				}
 			});
 		} else {
@@ -261,9 +261,9 @@ class AppData {
 			depositPersent.value = selectIndex;
 		}
 		depositAmount.addEventListener('input', () => {
-			if (depositAmount.value === '' ||!IsNamber(depositAmount.value)||depositPersent.value === '' || !IsNamber(depositPersent.value)|| Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value)> 100) {
+			if (depositAmount.value === '' || !IsNamber(depositAmount.value) || depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
 				start.disabled = true;
-				depositAmount.value='';
+				depositAmount.value = '';
 			} else {
 				start.removeAttribute('disabled');
 			}
@@ -297,6 +297,7 @@ class AppData {
 
 		salaryAmount.addEventListener('input', () => {
 			if (salaryAmount.value === ''  || !IsNamber(salaryAmount.value)) {
+				salaryAmount.value = '';
 				start.disabled = true;
 			} else {
 				start.removeAttribute('disabled');
