@@ -53,6 +53,11 @@ class AppData {
 		this.budgetDay = budgetDay;
 		this.budgetMonth = budgetMonth;
 		this.expensesMonth = expensesMonth;
+		this.salar = false;
+		this.depPersent = false;
+		this.amountPersent = false;
+
+
 	}
 	start() {
 		this.getInfoDeposit();
@@ -159,7 +164,22 @@ class AppData {
 			btnPlusIcome.style.display = 'none';
 		}
 	}
-
+	check() {
+		console.log('chekra');
+		if (this.deposit) {
+			if (this.salar && this.amountPersent && this.depPersen) {
+				start.removeAttribute('disabled');
+			} else {
+				start.disabled = true;
+			}
+		} else {
+			if (this.salar) {
+				start.removeAttribute('disabled');
+			} else {
+				start.disabled = true;
+			}
+		}
+	}
 	getTargetMonth() {
 		return targetAmount.value / this.budgetMonth;
 	}
@@ -255,28 +275,25 @@ class AppData {
 	depositHandler() {
 		if (depositCheck.checked) {
 			console.log('check');
-			start.disabled = true;
 			depositBanck.style.display = 'inline-block';
 			depositAmount.style.display = 'inline-block';
 			this.deposit = true;
 			depositBanck.addEventListener('change', this.changePersent);
 			depositPersent.addEventListener('input', () => {
-				start.disabled = true;
 				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
-				//	start.disabled = true;
 					depositPersent.value = '';
-					console.log('start.disabled = true depositPersent.addEventListener ');
+					this.depPersent = false;
 				} else {
-					//start.removeAttribute('disabled');
-					console.log('start.removeAttribute ', typeof(depositPersent.value));
+					this.depPersent = true;
+
 				}
 			});
 			depositAmount.addEventListener('input', () => {
 				if (depositAmount.value === '' || !IsNamber(depositAmount.value) || depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
-					//start.disabled = true;
+					this.amountPersent = false;
 					depositAmount.value = '';
 				} else {
-				//	start.removeAttribute('disabled');
+					this.amountPersent = true;
 				}
 			});
 		} else {
@@ -289,17 +306,7 @@ class AppData {
 			depositPersent.value = '';
 			this.deposit = false;
 			depositBanck.removeEventListener('change', this.changePersent);
-			depositPersent.removeEventListener('iput', () => {
-				start.disabled = true;
-				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
-					start.disabled = true;
-					depositPersent.value = '';
-					console.log('start.disabled = true depositPersent.addEventListener ');
-				} else {
-					start.removeAttribute('disabled');
-					console.log('start.removeAttribute ', typeof(depositPersent.value));
-				}
-			});
+
 		}
 	}
 
@@ -311,12 +318,17 @@ class AppData {
 		salaryAmount.addEventListener('input', () => {
 			if (salaryAmount.value === ''  || !IsNamber(salaryAmount.value)) {
 				salaryAmount.value = '';
-				start.disabled = true;
+				this.salar = false;
 			} else {
-				start.removeAttribute('disabled');
+				this.salar = true;
 			}
 		});
-		start.addEventListener('click', this.start.bind(this));
+
+		start.addEventListener('click', () =>{
+			this.check();
+			this.start.bind(this);
+		});// this.start.bind(this)
+		
 		buttonCancel.addEventListener('click', this.reset);
 		btnPlusExpenses.addEventListener('click', this.addExpensesBlock);
 		btnPlusIcome.addEventListener('click', this.addIncomeBlock);
