@@ -245,29 +245,12 @@ class AppData {
 			depositPersent.value = '';
 			depositPersent.style.display = 'inline-block';
 			depositPersent.removeAttribute('disabled');
-			depositPersent.addEventListener('input', () => {
-				start.disabled = true;
-				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
-					start.disabled = true;
-					depositPersent.value = '';
-					console.log('start.disabled = true depositPersent.addEventListener ');
-				} else {
-					start.removeAttribute('disabled');
-					console.log('start.removeAttribute ', typeof(depositPersent.value));
-				}
-			});
+
 		} else {
 			depositPersent.style.display = 'none';
 			depositPersent.value = selectIndex;
 		}
-		depositAmount.addEventListener('input', () => {
-			if (depositAmount.value === '' || !IsNamber(depositAmount.value) || depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
-				start.disabled = true;
-				depositAmount.value = '';
-			} else {
-				start.removeAttribute('disabled');
-			}
-		});
+
 	}
 	depositHandler() {
 		if (depositCheck.checked) {
@@ -277,6 +260,25 @@ class AppData {
 			depositAmount.style.display = 'inline-block';
 			this.deposit = true;
 			depositBanck.addEventListener('change', this.changePersent);
+			depositPersent.addEventListener('input', () => {
+				start.disabled = true;
+				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
+				//	start.disabled = true;
+					depositPersent.value = '';
+					console.log('start.disabled = true depositPersent.addEventListener ');
+				} else {
+					//start.removeAttribute('disabled');
+					console.log('start.removeAttribute ', typeof(depositPersent.value));
+				}
+			});
+			depositAmount.addEventListener('input', () => {
+				if (depositAmount.value === '' || !IsNamber(depositAmount.value) || depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
+					//start.disabled = true;
+					depositAmount.value = '';
+				} else {
+				//	start.removeAttribute('disabled');
+				}
+			});
 		} else {
 			console.log('uncheck');
 			depositBanck.style.display = 'none';
@@ -287,6 +289,17 @@ class AppData {
 			depositPersent.value = '';
 			this.deposit = false;
 			depositBanck.removeEventListener('change', this.changePersent);
+			depositPersent.removeEventListener('iput', () => {
+				start.disabled = true;
+				if (depositPersent.value === '' || !IsNamber(depositPersent.value) || Number.parseInt(depositPersent.value) < 0 ||  Number.parseInt(depositPersent.value) > 100) {
+					start.disabled = true;
+					depositPersent.value = '';
+					console.log('start.disabled = true depositPersent.addEventListener ');
+				} else {
+					start.removeAttribute('disabled');
+					console.log('start.removeAttribute ', typeof(depositPersent.value));
+				}
+			});
 		}
 	}
 
